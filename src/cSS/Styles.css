@@ -1,0 +1,16 @@
+.Header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.Header-text{
+    font-size: medium;
+    font-family: cursive;
+}
+.Header-heading{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.Footer{
+    font-family: cursive;
+    font-size: small;
+    
+}
