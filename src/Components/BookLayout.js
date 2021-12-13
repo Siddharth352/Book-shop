@@ -9,8 +9,8 @@ export default (props)=>{
 
     console.log(props);
     return(
-        <div className="text-center">
-    <Card
+        <div className="text-center ">
+    <Card className="cardLayout"
         body
         outline
     >
@@ -28,7 +28,7 @@ export default (props)=>{
             <p>Theme : {props.props.theme}</p>
             <p>Price : {props.props.cost}</p>
         </CardText>
-        <Button onClick={downloadLink}>
+        <Button className="bg-danger" onClick={downloadLink}>
             Download
         </Button>
         </CardBody>
