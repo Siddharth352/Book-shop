@@ -12,5 +12,24 @@
 .Footer{
     font-family: cursive;
     font-size: small;
+    bottom: 0;
+    width: 100%;
+  
     
+}
+.AddingBookContainer{
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgb(237, 229, 153)) !important;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+}
+.cardLayout{
+ 
+   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgb(237, 229, 153)) !important; 
+}
+.home{
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgb(237, 229, 153)) !important; 
+}
+.temp{
+    font-family: cursive;
+    margin-bottom: 0.5em;
 }
