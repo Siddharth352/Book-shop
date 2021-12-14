@@ -1,8 +1,9 @@
 import React  from "react";
 import { useState ,useEffect} from "react";
+import { Container } from "reactstrap";
 import BookLayout from "./BookLayout";
 
-export default ()=>{
+export default function BookList(){
     const [bookList,setBookList] = useState([]);
     useEffect(()=>{
         update();
@@ -18,11 +19,16 @@ export default ()=>{
    
 
     return <div>
+         
+         <Container className=" mb-3">
+         <h3 className="text-center temp">Book List</h3>
         {bookList.map((element,index)=>{
-            // return <li key={index}>{element}</li>
             return <BookLayout props = {element}/>
         })}
-      
+        
+                
+        </Container>
+
     </div>
 
 

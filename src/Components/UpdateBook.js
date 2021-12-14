@@ -1,24 +1,37 @@
 import React from "react";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
-export default function AddBook(){
-    function SaveData(event){
-        event.preventDefault();
-        var newObject = {bookName:"",author:"",theme:"",downlaodLink:""};
-        newObject.author = event.target.AuthorName.value;
-        newObject.bookName = event.target.BookName.value;
-        newObject.theme = event.target.Theme.value;
-        newObject.downlaodLink = event.target.DownlaodLink.value
 
-        console.log(newObject);
-        //save Object to database
+
+export default function UpdateBook(){
+
+
+    function UpdateData(event){
+        event.preventDefault();
+        console.log("make Request to update the book data");
     }
 
     return <div className="AddingBookContainer">
-        <Container className="mt-3 mb-3">
+    <Container className="mt-3 mb-3">
 
-    <h2 className="text-center">Add Book </h2>
-        <Form onSubmit={SaveData}>
+    <h2 className="text-center">Update Book </h2>
+        <Form onSubmit={UpdateData}>
+    <FormGroup row>
+        <Label
+            for ="BookId"
+            sm={2}
+            >
+                Book Unique Id
+            </Label>
+        <Col sm={10}>
+            <Input
+             id="BookId"
+             name="BookId"
+             placeholder="Enter the Unique Id of Book"
+             type="text"
+         />
+        </Col>        
+        </FormGroup>        
     <FormGroup row>
         <Label
         for="BookName"
@@ -51,8 +64,8 @@ export default function AddBook(){
         />
         </Col>
     </FormGroup>
-    
-    
+
+
     <FormGroup row>
         <Label
         for="Theme"
@@ -89,7 +102,7 @@ export default function AddBook(){
     </FormGroup>
     <Button type="submit"  className="bg-danger mb-1">
     Submit
-  </Button>
+    </Button>
     </Form>                 
     </Container>
     </div>
