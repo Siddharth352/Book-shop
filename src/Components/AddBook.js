@@ -1,17 +1,32 @@
+import axios from "axios";
 import React from "react";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
 export default function AddBook(){
     function SaveData(event){
         event.preventDefault();
-        var newObject = {bookName:"",author:"",theme:"",downlaodLink:""};
+        console.log(event);
+        var newObject = {name:"",author:"",description:"",download_link:"",cost:""};
         newObject.author = event.target.AuthorName.value;
-        newObject.bookName = event.target.BookName.value;
-        newObject.theme = event.target.Theme.value;
-        newObject.downlaodLink = event.target.DownlaodLink.value
+        newObject.name = event.target.BookName.value;
+        newObject.description = event.target.Theme.value;
+        newObject.download_link = event.target.DownloadLink.value;
+        newObject.cost = event.target.marketprice.value;
 
+        
+        AddBookToDB(newObject);
         console.log(newObject);
         //save Object to database
+    }
+
+    function AddBookToDB(book){
+        axios.post("http://localhost:8080/Book",book)
+        .then(res=>{
+            console.log(res);
+        })
+        .catch(err=>{
+            console.log("error occured in saving form data ",err);
+        })
     }
 
     return <div className="AddingBookContainer">
@@ -69,16 +84,37 @@ export default function AddBook(){
         />
         </Col>
     </FormGroup>
+
+    <FormGroup row>
+        <Label
+        for="marketprice"
+        sm={2}
+        >
+        Market Price
+        </Label>
+        <Col sm={10}>
+        <Input
+            id="marketprice"
+            name="marketprice"
+            type="text"
+        />
+        <FormText>
+            Enter the market price of this book.
+        </FormText>
+        </Col>
+    </FormGroup>
+
+
     <FormGroup row>
         <Label
         for="DownloadLink"
         sm={2}
         >
-        Downlaod Link
+        Download Link
         </Label>
         <Col sm={10}>
         <Input
-            id="DownlaodLink"
+            id="DownloadLink"
             name="DownloadLink"
             type="text"
         />
@@ -87,6 +123,7 @@ export default function AddBook(){
         </FormText>
         </Col>
     </FormGroup>
+
     <Button type="submit"  className="bg-danger mb-1">
     Submit
   </Button>

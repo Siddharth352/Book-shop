@@ -4,10 +4,11 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "react
 export default (props)=>{
 
     function downloadLink(){
-        window.open(props.props.downloadLink,"_blank");
+        console.log("clicked and doenload link is ",props);
+        window.open(props.props.download_link,"_blank");
     }
 
-    console.log(props);
+    console.log("Inside here ",props);
     return(
         <div className="text-center ">
     <Card className="cardLayout"
@@ -24,8 +25,14 @@ export default (props)=>{
         >
             By {props.props.author}
         </CardSubtitle>
+        <CardSubtitle
+            className="mb-2 text-muted"
+            tag="h6"
+        >
+            ID : {props.props.id}
+        </CardSubtitle>
         <CardText>
-            <p>Theme : {props.props.theme}</p>
+            <p>Theme : {props.props.description}</p>
             <p>Price : {props.props.cost}</p>
         </CardText>
         <Button className="bg-danger" onClick={downloadLink}>
