@@ -1,9 +1,20 @@
+import axios from "axios";
 import React from "react";
+import { NotificationContainer } from "react-notifications";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Input, Label ,Button, Col, Container, Form, FormGroup } from "reactstrap";
 
 function DeleteBook(event){
     event.preventDefault();
-    console.log("make Request for Delete this book");
+    axios.delete(`http://localhost:8080/DeleteBook/${event.target.BookName.value}`)
+    .then(res=>{
+        console.log(res);
+        NotificationManager.success("Book Deleted succesfully","",1000);
+    })
+    .catch(err=>{
+        console.log(err);
+        NotificationManager.error("somthing went wrong");
+    })
 }
 
 export default function Deletebook(){
@@ -23,7 +34,7 @@ export default function Deletebook(){
         <Input
             id="BookName"
             name="BookName"
-            placeholder="Enter the name of Book"
+            placeholder="Enter the Unique Id of Book"
             type="text"
         />
         </Col>
@@ -34,5 +45,6 @@ export default function Deletebook(){
     </Button>
     </Form>                 
 </Container>
+<NotificationContainer/>
 </div>
 }

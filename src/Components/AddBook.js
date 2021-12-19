@@ -1,11 +1,13 @@
 import axios from "axios";
 import React from "react";
+import { NotificationManager } from "react-notifications";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
 export default function AddBook(){
     function SaveData(event){
         event.preventDefault();
-        console.log(event);
+       
         var newObject = {name:"",author:"",description:"",download_link:"",cost:""};
         newObject.author = event.target.AuthorName.value;
         newObject.name = event.target.BookName.value;
@@ -15,7 +17,7 @@ export default function AddBook(){
 
         
         AddBookToDB(newObject);
-        console.log(newObject);
+        
         //save Object to database
     }
 
@@ -23,13 +25,18 @@ export default function AddBook(){
         axios.post("http://localhost:8080/Book",book)
         .then(res=>{
             console.log(res);
+            NotificationManager.success('Data saved succesfully',"",1000);
         })
         .catch(err=>{
             console.log("error occured in saving form data ",err);
+            NotificationManager.error("Something went wrong");
+            
         })
     }
 
     return <div className="AddingBookContainer">
+     
+  
         <Container className="mt-3 mb-3">
 
     <h2 className="text-center">Add Book </h2>
@@ -129,6 +136,8 @@ export default function AddBook(){
   </Button>
     </Form>                 
     </Container>
+    <NotificationContainer/>        
+
     </div>
 
 }

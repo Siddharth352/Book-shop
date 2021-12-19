@@ -1,4 +1,7 @@
+import axios from "axios";
 import React from "react";
+import { NotificationContainer } from "react-notifications";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 
 
@@ -8,7 +11,25 @@ export default function UpdateBook(){
 
     function UpdateData(event){
         event.preventDefault();
-        console.log("make Request to update the book data");
+        var newObject = {id:"",name:"",author:"",description:"",download_link:"",cost:""};
+        newObject.author = event.target.AuthorName.value;
+        newObject.name = event.target.BookName.value;
+        newObject.description = event.target.Theme.value;
+        newObject.download_link = event.target.DownloadLink.value;
+        newObject.cost = event.target.marketprice.value;
+        newObject.id = event.target.BookId.value;
+
+
+        axios.put("http://localhost:8080/UpdateBook",newObject)
+        .then(res=>{
+            console.log(res);
+            NotificationManager.success("Book updated successfully","",1000);
+        })
+        .catch(err=>{
+            console.log(err);
+            NotificationManager.error("Something went wrong");
+        })
+       
     }
 
     return <div className="AddingBookContainer">
@@ -65,6 +86,22 @@ export default function UpdateBook(){
         </Col>
     </FormGroup>
 
+    <FormGroup row>
+        <Label
+        for="marketprice"
+        sm={2}
+        >
+        Market Price
+        </Label>
+        <Col sm={10}>
+        <Input
+            id="marketprice"
+            name="marketprice"
+            placeholder="Enter the Market price of this book"
+            type="text"
+        />
+        </Col>
+    </FormGroup>
 
     <FormGroup row>
         <Label
@@ -105,6 +142,7 @@ export default function UpdateBook(){
     </Button>
     </Form>                 
     </Container>
+    <NotificationContainer/>
     </div>
 
 }
