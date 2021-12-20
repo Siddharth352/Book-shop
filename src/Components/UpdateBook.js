@@ -1,26 +1,15 @@
-import axios from "axios";
 import React from "react";
 import { NotificationContainer } from "react-notifications";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
-
-
+import { axiosPutReuqest } from "./Services/AxiosCall";
+import { createNewObject } from "./Services/GetObject";
 
 export default function UpdateBook(){
-
-
     function UpdateData(event){
         event.preventDefault();
-        var newObject = {id:"",name:"",author:"",description:"",download_link:"",cost:""};
-        newObject.author = event.target.AuthorName.value;
-        newObject.name = event.target.BookName.value;
-        newObject.description = event.target.Theme.value;
-        newObject.download_link = event.target.DownloadLink.value;
-        newObject.cost = event.target.marketprice.value;
-        newObject.id = event.target.BookId.value;
-
-
-        axios.put("http://localhost:8080/UpdateBook",newObject)
+        var newObject = createNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,event.target.BookId.value);
+        axiosPutReuqest("UpdateBook",newObject)
         .then(res=>{
             console.log(res);
             NotificationManager.success("Book updated successfully","",1000);
@@ -29,12 +18,9 @@ export default function UpdateBook(){
             console.log(err);
             NotificationManager.error("Something went wrong");
         })
-       
     }
-
     return <div className="AddingBookContainer">
     <Container className="mt-3 mb-3">
-
     <h2 className="text-center">Update Book </h2>
         <Form onSubmit={UpdateData}>
     <FormGroup row>

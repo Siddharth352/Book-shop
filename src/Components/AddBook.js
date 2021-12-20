@@ -1,37 +1,27 @@
-import axios from "axios";
 import React from "react";
 import { NotificationManager } from "react-notifications";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
+import { axiosPostRequest } from "./Services/AxiosCall";
+import { createNewObject } from "./Services/GetObject";
 
 export default function AddBook(){
     function SaveData(event){
         event.preventDefault();
-       
-        var newObject = {name:"",author:"",description:"",download_link:"",cost:""};
-        newObject.author = event.target.AuthorName.value;
-        newObject.name = event.target.BookName.value;
-        newObject.description = event.target.Theme.value;
-        newObject.download_link = event.target.DownloadLink.value;
-        newObject.cost = event.target.marketprice.value;
-
-        
+        var newObject = createNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,null);
         AddBookToDB(newObject);
-        
-        //save Object to database
     }
 
     function AddBookToDB(book){
-        axios.post("http://localhost:8080/Book",book)
-        .then(res=>{
-            console.log(res);
-            NotificationManager.success('Data saved succesfully',"",1000);
-        })
-        .catch(err=>{
-            console.log("error occured in saving form data ",err);
-            NotificationManager.error("Something went wrong");
-            
-        })
+        axiosPostRequest("Book",book)
+            .then(res=>{
+                console.log(res);
+                NotificationManager.success('Data saved succesfully',"",1000);
+            })
+            .catch(err=>{
+                console.log("error occured in saving form data ",err);
+                NotificationManager.error("Something went wrong");
+            })
     }
 
     return <div className="AddingBookContainer">
@@ -137,7 +127,5 @@ export default function AddBook(){
     </Form>                 
     </Container>
     <NotificationContainer/>        
-
     </div>
-
 }

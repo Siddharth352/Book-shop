@@ -1,12 +1,12 @@
-import axios from "axios";
 import React from "react";
 import { NotificationContainer } from "react-notifications";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Input, Label ,Button, Col, Container, Form, FormGroup } from "reactstrap";
+import { axiosDeleteRequest } from "./Services/AxiosCall";
 
 function DeleteBook(event){
     event.preventDefault();
-    axios.delete(`http://localhost:8080/DeleteBook/${event.target.BookName.value}`)
+    axiosDeleteRequest("DeleteBook",event.target.BookName.value)
     .then(res=>{
         console.log(res);
         NotificationManager.success("Book Deleted succesfully","",1000);

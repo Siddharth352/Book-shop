@@ -2,13 +2,9 @@ import React from "react";
 import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle } from "reactstrap";
 
 export default (props)=>{
-
     function downloadLink(){
-        console.log("clicked and doenload link is ",props);
         window.open(props.props.download_link,"_blank");
     }
-
-    console.log("Inside here ",props);
     return(
         <div className="text-center ">
     <Card className="cardLayout"
