@@ -1,35 +1,45 @@
 import React  from "react";
 import { useState ,useEffect} from "react";
+import { NotificationContainer } from "react-notifications";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Container } from "reactstrap";
 import BookLayout from "./BookLayout";
+import { axiosGetReuqest } from "./Services/AxiosCall";
 
 export default function BookList(){
     const [bookList,setBookList] = useState([]);
     useEffect(()=>{
-        update();
+        FetchData();
     },[]);
 
-    function update(){
-        setBookList(bookList=>[...bookList,
-            {id:"1",name:"Girl in room 345",author:"Chetan Bhagat",theme:"Suspense Thriller",cost:340,downloadLink:"https://indianpdf.files.wordpress.com/2021/09/the-girl-in-room-105-chetan-bhagat-www.indianpdf.com_-book-novel-pdf-download-online-free.pdf"},
-            {id:"2",name:"I too had a love story",author:"Virendra Singh",theme:"Love Story",cost:290,downloadLink:""},
-            {id:"3",name:"An arranged Murder",author:"Chetan Bhagat",theme:"Thriller",cost:255,downloadLink:""}]);
+    function FetchData(){
+        axiosGetReuqest("Books")
+        .then(res=>{
+            console.log("result here",res);
+            update(res.data);
+            NotificationManager.success("Book List Fetched successfully","",1000);
+        })
+        .catch(err=>{
+            console.log("error occurred ->",err);
+            NotificationManager.error("Something went wrong");
+        })
     }
+    function update(data){
+        data.forEach(element => {
+            console.log(element);
+            setBookList(bookList=>[...bookList,element])
+            
+        });
+         }
     
-   
-
-    return <div>
-         
+    return <div>   
          <Container className=" mb-3">
          <h3 className="text-center temp">Book List</h3>
         {bookList.map((element,index)=>{
-            return <BookLayout props = {element}/>
+            return <BookLayout  props = {element}/>
         })}
-        
-                
+           
         </Container>
-
+    <NotificationContainer/>
     </div>
-
-
 }

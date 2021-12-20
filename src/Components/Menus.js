@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ListGroup } from "reactstrap";
-
 export default function Menu(){
-    
     return <div>
-
         <ListGroup >
             <Link  className="list-group-item list-group-item-action" tag="a" to="/" action>
                 BookList
@@ -20,6 +17,5 @@ export default function Menu(){
                 UpdateBook
             </Link>
         </ListGroup>
-
     </div>
 }

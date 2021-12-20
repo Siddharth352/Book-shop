@@ -1,20 +1,32 @@
 import React from "react";
+import { NotificationManager } from "react-notifications";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
+import { axiosPostRequest } from "./Services/AxiosCall";
+import { createNewObject } from "./Services/GetObject";
 
 export default function AddBook(){
     function SaveData(event){
         event.preventDefault();
-        var newObject = {bookName:"",author:"",theme:"",downlaodLink:""};
-        newObject.author = event.target.AuthorName.value;
-        newObject.bookName = event.target.BookName.value;
-        newObject.theme = event.target.Theme.value;
-        newObject.downlaodLink = event.target.DownlaodLink.value
+        var newObject = createNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,null);
+        AddBookToDB(newObject);
+    }
 
-        console.log(newObject);
-        //save Object to database
+    function AddBookToDB(book){
+        axiosPostRequest("Book",book)
+            .then(res=>{
+                console.log(res);
+                NotificationManager.success('Data saved succesfully',"",1000);
+            })
+            .catch(err=>{
+                console.log("error occured in saving form data ",err);
+                NotificationManager.error("Something went wrong");
+            })
     }
 
     return <div className="AddingBookContainer">
+     
+  
         <Container className="mt-3 mb-3">
 
     <h2 className="text-center">Add Book </h2>
@@ -69,16 +81,37 @@ export default function AddBook(){
         />
         </Col>
     </FormGroup>
+
+    <FormGroup row>
+        <Label
+        for="marketprice"
+        sm={2}
+        >
+        Market Price
+        </Label>
+        <Col sm={10}>
+        <Input
+            id="marketprice"
+            name="marketprice"
+            type="text"
+        />
+        <FormText>
+            Enter the market price of this book.
+        </FormText>
+        </Col>
+    </FormGroup>
+
+
     <FormGroup row>
         <Label
         for="DownloadLink"
         sm={2}
         >
-        Downlaod Link
+        Download Link
         </Label>
         <Col sm={10}>
         <Input
-            id="DownlaodLink"
+            id="DownloadLink"
             name="DownloadLink"
             type="text"
         />
@@ -87,11 +120,12 @@ export default function AddBook(){
         </FormText>
         </Col>
     </FormGroup>
+
     <Button type="submit"  className="bg-danger mb-1">
     Submit
   </Button>
     </Form>                 
     </Container>
+    <NotificationContainer/>        
     </div>
-
 }

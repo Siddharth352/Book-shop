@@ -9,15 +9,11 @@ import { Col, Container, Row } from "reactstrap";
 import Menus from "./Menus";
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
 
-
 export default()=>{
-
     return <div className="home">
             <Router>
-           
             <Header/>
             <Container>
-    
             <Row>
                  <Col md={4}>
                      <Menus/>
@@ -31,16 +27,9 @@ export default()=>{
                     </Routes>
                   
                 </Col>
-            </Row>
-                         
-                        
+            </Row>         
             </Container>
-   
             <Footer/>
-           
             </Router>
     </div>
-
-
-
 }
