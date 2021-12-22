@@ -16,6 +16,9 @@ export default function Menu(){
             <Link  className="list-group-item list-group-item-action"tag="a" to="/update-book" action>
                 UpdateBook
             </Link>
+            <Link  className="list-group-item list-group-item-action"tag="a" to="/logout" action>
+                Logout
+            </Link>
         </ListGroup>
     </div>
 }

@@ -8,6 +8,7 @@ import UpdateBook from "./UpdateBook";
 import { Col, Container, Row } from "reactstrap";
 import Menus from "./Menus";
 import { BrowserRouter as Router,Route, Routes } from "react-router-dom";
+import Logout from "./Logout";
 
 export default()=>{
     return <div className="home">
@@ -24,6 +25,7 @@ export default()=>{
                         <Route  path="/add-book" element={<AddBook/>} exact/>
                         <Route path="/delete-book" element={<DeleteBook/>} exact/>
                         <Route  path="/update-book" element={<UpdateBook/>} exact/>
+                        <Route  path="/logout" element={<Logout/>} exact/>
                     </Routes>
                   
                 </Col>

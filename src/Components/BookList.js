@@ -2,7 +2,7 @@ import React  from "react";
 import { useState ,useEffect} from "react";
 import { NotificationContainer } from "react-notifications";
 import NotificationManager from "react-notifications/lib/NotificationManager";
-import { Container } from "reactstrap";
+import { Button, Container } from "reactstrap";
 import BookLayout from "./BookLayout";
 import { axiosGetReuqest } from "./Services/AxiosCall";
 
@@ -11,11 +11,9 @@ export default function BookList(){
     useEffect(()=>{
         FetchData();
     },[]);
-
     function FetchData(){
         axiosGetReuqest("Books")
         .then(res=>{
-            console.log("result here",res);
             update(res.data);
             NotificationManager.success("Book List Fetched successfully","",1000);
         })
