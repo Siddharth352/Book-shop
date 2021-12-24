@@ -9,6 +9,7 @@ export default function Logout(){
         window.location.replace("/");
     }
     return <div>
+        {localStorage.getItem===null?null:<div>
 
         <Container className="text-center">
             <h4>Hey {localStorage.getItem("firstName")},</h4>
@@ -18,6 +19,8 @@ export default function Logout(){
             <Button className="bg-danger" onClick={clearData}>  Logout </Button>
 
         </Container>
+
+    </div>}
 
     </div>
 }

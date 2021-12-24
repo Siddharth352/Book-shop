@@ -3,8 +3,8 @@ import Login from "./Components/Login";
 function App() {
   return (
     <div>
-       {/* <Home/> */}
-       <Login/>
+       <Home/>
+       {/* <Login/> */}
     </div>
   );
 }

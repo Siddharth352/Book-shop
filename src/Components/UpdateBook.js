@@ -19,7 +19,10 @@ export default function UpdateBook(){
             NotificationManager.error("Something went wrong");
         })
     }
-    return <div className="AddingBookContainer">
+    return <div>
+        {localStorage.getItem("username")===null?null:
+    
+    <div className="AddingBookContainer">
     <Container className="mt-3 mb-3">
     <h2 className="text-center">Update Book </h2>
         <Form onSubmit={UpdateData}>
@@ -130,5 +133,6 @@ export default function UpdateBook(){
     </Container>
     <NotificationContainer/>
     </div>
-
+    }
+    </div>
 }

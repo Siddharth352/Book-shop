@@ -30,7 +30,11 @@ export default function BookList(){
         });
          }
     
-    return <div>   
+    return <div>
+ 
+         {localStorage.getItem("username")==null
+         ? null :
+    <div>   
          <Container className=" mb-3">
          <h3 className="text-center temp">Book List</h3>
         {bookList.map((element,index)=>{
@@ -39,5 +43,7 @@ export default function BookList(){
            
         </Container>
     <NotificationContainer/>
-    </div>
+    </div>}
+           
+    </div> 
 }
