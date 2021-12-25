@@ -18,7 +18,10 @@ function DeleteBook(event){
 }
 
 export default function Deletebook(){
-    return <div className="AddingBookContainer" >
+    return <div>
+        {localStorage.getItem("username")===null?null:
+        
+    <div className="AddingBookContainer" >
     <Container className="mt-3 mb-3">
 
     <h2 className="text-center">Delete Book </h2>
@@ -47,4 +50,6 @@ export default function Deletebook(){
 </Container>
 <NotificationContainer/>
 </div>
+}
+    </div>
 }

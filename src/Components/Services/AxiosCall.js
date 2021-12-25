@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const url = "http://localhost:8080/";
-
 function axiosGetReuqest(param){
         return axios.get(url+param)      
 }
@@ -17,5 +16,7 @@ function axiosDeleteRequest(param,id){
 function axiosPutReuqest(param,data){
     return axios.put(url+param,data)
 }
+
+
 
 export {axiosGetReuqest,axiosPostRequest,axiosDeleteRequest,axiosPutReuqest};

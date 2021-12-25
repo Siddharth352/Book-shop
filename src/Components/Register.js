@@ -3,17 +3,19 @@ import { NotificationManager } from "react-notifications";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 import { axiosPostRequest } from "./Services/AxiosCall";
-import { createBookNewObject } from "./Services/GetObject";
+import { createUserNewObject } from "./Services/GetObject";
 
-export default function AddBook(){
+export default function Register(){
     function SaveData(event){
         event.preventDefault();
-        var newObject = createBookNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,null);
-        AddBookToDB(newObject);
+        var newObject = createUserNewObject(event.target.Username.value,event.target.FirstName.value,event.target.LastName.value,event.target.Age.value,event.target.MobileNo.value,event.target.Password.value,event.target.email.value);
+        
+        AddUserToDB(newObject);
     }
 
-    function AddBookToDB(book){
-        axiosPostRequest("Book",book)
+    function AddUserToDB(user){
+        console.log("user",user);
+        axiosPostRequest("Register",user)
             .then(res=>{
                 console.log(res);
                 NotificationManager.success('Data saved succesfully',"",1000);
@@ -24,41 +26,59 @@ export default function AddBook(){
             })
     }
 
-    return <div className="AddingBookContainer">
+    return <div className = "AddingBookContainer" >
      
   
         <Container className="mt-3 mb-3">
 
-    <h2 className="text-center">Add Book </h2>
+    <h2 className="text-center">Register</h2>
         <Form onSubmit={SaveData}>
     <FormGroup row>
         <Label
-        for="BookName"
+        for="Username"
         sm={2}
         >
-        Book Name
+        User Name
         </Label>
         <Col sm={10}>
         <Input
-            id="BookName"
-            name="BookName"
-            placeholder="Enter the name of Book"
+            id="Username"
+            name="Username"
+            placeholder="Enter your username"
             type="text"
         />
-        </Col>
+        </Col>    
     </FormGroup>
+
     <FormGroup row>
         <Label
-        for="AuthorName"
+        for="Password"
         sm={2}
         >
-        Author Name
+        Password
         </Label>
         <Col sm={10}>
         <Input
-            id="AuthorName"
-            name="AuthorName"
-            placeholder="Enter the name of author"
+            id="Password"
+            name="Password"
+            type="Password"
+        />
+        
+        </Col>
+    </FormGroup>
+
+    <FormGroup row>
+        <Label
+        for="FirstName"
+        sm={2}
+        >
+        First Name
+        </Label>
+        <Col sm={10}>
+        <Input
+            id="FirstName"
+            name="FirstName"
+            placeholder="Enter your first name"
             type="text"
         />
         </Col>
@@ -67,16 +87,16 @@ export default function AddBook(){
     
     <FormGroup row>
         <Label
-        for="Theme"
+        for="LastName"
         sm={2}
         >
-        Theme 
+        Last Name 
         </Label>
         <Col sm={10}>
         <Input
-            id="Theme"
-            name="Theme"
-            placeholder="for eg. Suspense, Thriller, Romantic etc."
+            id="LastName"
+            name="LastName"
+            placeholder="Enter your last name"
             type="text"
         />
         </Col>
@@ -84,19 +104,19 @@ export default function AddBook(){
 
     <FormGroup row>
         <Label
-        for="marketprice"
+        for="Age"
         sm={2}
         >
-        Market Price
+        Age
         </Label>
         <Col sm={10}>
         <Input
-            id="marketprice"
-            name="marketprice"
+            id="Age"
+            name="Age"
             type="text"
         />
         <FormText>
-            Enter the market price of this book.
+            Enter your age in numbers
         </FormText>
         </Col>
     </FormGroup>
@@ -104,22 +124,40 @@ export default function AddBook(){
 
     <FormGroup row>
         <Label
-        for="DownloadLink"
+        for="MobileNo"
         sm={2}
         >
-        Download Link
+        Mobile No.
         </Label>
         <Col sm={10}>
         <Input
-            id="DownloadLink"
-            name="DownloadLink"
+            id="MobileNo"
+            name="MobileNo"
             type="text"
         />
         <FormText>
-            Here you can enter a website link which have this book pdf or you can enter any drive link which contain this book.
+            please specify your country code
         </FormText>
         </Col>
     </FormGroup>
+
+    <FormGroup row>
+        <Label
+        for="email"
+        sm={2}
+        >
+        Email
+        </Label>
+        <Col sm={10}>
+        <Input
+            id="email"
+            name="email"
+            type="text"
+        />
+        </Col>
+    </FormGroup>
+
+    
 
     <Button type="submit"  className="bg-danger mb-1">
     Submit
