@@ -3,12 +3,12 @@ import { NotificationContainer } from "react-notifications";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 import { Button, Col, Container, Form, FormGroup, FormText, Input, Label } from "reactstrap";
 import { axiosPutReuqest } from "./Services/AxiosCall";
-import { createNewObject } from "./Services/GetObject";
+import { createBookNewObject } from "./Services/GetObject";
 
 export default function UpdateBook(){
     function UpdateData(event){
         event.preventDefault();
-        var newObject = createNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,event.target.BookId.value);
+        var newObject = createBookNewObject(event.target.AuthorName.value,event.target.BookName.value,event.target.Theme.value,event.target.DownloadLink.value,event.target.marketprice.value,event.target.BookId.value);
         axiosPutReuqest("UpdateBook",newObject)
         .then(res=>{
             console.log(res);

@@ -72,7 +72,7 @@ export default function Login() {
         </Button> 
         </Form> 
 
-        <p className="mt-4">New User??... Register here</p>   
+        <p className="mt-4">New User??... Please Register First</p>   
                     
         </Container></div>
         }
